@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="TwitterApp">
+<head>
+<title ng-bind="title"></title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="app/lib/css/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="app/lib/css/bootstrap/css/bootstrap-theme.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="app/assets/css/style.css" type="text/css" media="screen" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<header id="banner">
+	<nav class="navbar navbar-default" id="main-navigation">
+		<ul class="nav navbar-nav" ng-controller="NavigationCtrl">
+			<li ng-class="{active: menuItem == 'timeline'}"><a ng-href="#!/" ng-click="setCurrentSection('timeline')">Timeline</a></li>
+			<li ng-class="{active: menuItem == 'home'}"><a ng-href="#!/home" ng-click="setCurrentSection('home')">Home</a></li>
+			<li ng-class="{active: menuItem == 'followers'}"><a ng-href="#!/followers" ng-click="setCurrentSection('followers')">Followers</a></li>
+		</ul>
+		<button ng-controller="NewTweetToggleCtrl" ng-click="toggleTweetForm()" type="button" id="new-tweet" class="navbar-right btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button>
+		<form method="get" class="navbar-form navbar-right" role="search" ng-controller="SearchFormCtrl" ng-submit="search()">
+        	<div class="form-group">
+          		<input type="text" class="form-control" ng-model="query" placeholder="Search" />
+        	</div>
+        	<button type="submit" class="btn btn-default">Submit</button>
+     	</form>
+	</nav>
+</header>
+
+<form ng-controller="NewTweetFormCtrl" ng-submit="sendTweet()" novalidate method="post" name="newTweetForm" id="new-tweet-form" ng-show="tweetFormVisible">
+	<p id="char-count" ng-class="{'text-danger': charCount > 140}">{{charCount}}</p>
+	<div>
+		<textarea ng-change="checkLength()" class="form-control" name="tweet" rows="20" cols="20" ng-model="tweetText" placeholder="What's happening?"></textarea>
+	</div>
+	<div class="bg-danger msg" ng-show="overLimit">Excedeed 140 characters</div>
+	<div class="bg-success msg" ng-show="tweetSent">Tweet sent successfully</div>
+	<p><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Tweet</button></p>
+</form>
+
+<div id="content" ng-view></div>
+
+
+
+<script type="text/javascript" src="app/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="app/lib/js/angular.min.js"></script>
+<script type="text/javascript" src="app/lib/js/angular-locale_it-it.js"></script>
+<script type="text/javascript" src="app/lib/js/angular-route.min.js"></script>
+<script type="text/javascript" src="app/lib/js/angular-resource.min.js"></script>
+<script type="text/javascript" src="app/lib/js/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="app/lib/js/angular-cookies.min.js"></script>
+
+<script type="text/javascript" src="app/components/app.js"></script>
+
+<script type="text/javascript" src="app/components/controllers/TimeLineCtrl.js"></script>
+<script type="text/javascript" src="app/components/controllers/NavigationCtrl.js"></script>
+<script type="text/javascript" src="app/components/controllers/HomeCtrl.js"></script>
+<script type="text/javascript" src="app/components/controllers/SearchCtrl.js"></script>
+<script type="text/javascript" src="app/components/controllers/SearchFormCtrl.js"></script>
+<script type="text/javascript" src="app/components/controllers/NewTweetToggleCtrl.js"></script>
+<script type="text/javascript" src="app/components/controllers/NewTweetFormCtrl.js"></script>
+<script type="text/javascript" src="app/components/controllers/FollowersCtrl.js"></script>
+
+<script type="text/javascript" src="app/components/services/Twitter.js"></script>
+<script type="text/javascript" src="app/components/services/Storage.js"></script>
+<script type="text/javascript" src="app/components/filters/Filters.js"></script>
+	
+</body>
+</html>

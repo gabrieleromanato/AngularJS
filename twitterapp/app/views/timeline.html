@@ -1,0 +1,23 @@
+<div id="timeline" ng-controller="TimeLineCtrl">
+  <div id="loader-wrapper" ng-show="!tweetsLoaded">
+	<div id="loader" class="loader10"></div>
+  </div>
+    <p>
+		<button type="button" class="btn btn-primary" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+  	</p>
+	<ul class="tweets" ng-cloak>
+		<li class="tweet clearfix" ng-repeat="tweet in latestTweets.data">
+			<figure class="tweet-avatar">
+				<img ng-src="{{tweet.user.profile_image_url}}" class="img-circle" alt="" />
+			</figure>
+		  <div class="tweet-content">
+			<div class="tweet-header">
+				<a ng-href="https://twitter.com/{{tweet.user.screen_name}}" class="name">{{tweet.user.name}}</a>
+				<a ng-href="https://twitter.com/{{tweet.user.screen_name}}" class="screen-name">@{{tweet.user.screen_name}}</a>
+				<time>{{tweet.created_at | relativeTime}}</time>
+			</div>
+			<p ng-bind-html="tweet.text | tweetify"></p>
+		  </div>
+		</li>
+	</ul>
+</div>

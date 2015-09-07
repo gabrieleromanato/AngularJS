@@ -1,0 +1,13 @@
+{
+    "name": "twitterapp",
+    "version": "1.0",
+    "description": "Twitter app with AngularJS",
+    "main": "server.js",
+    "author": "Gabriele Romanato",
+    "license": "MIT",
+    "dependencies": {
+        "express": "4.13.3",
+        "twitter": "1.2.5",
+        "body-parser": "1.13.3"
+    }
+}

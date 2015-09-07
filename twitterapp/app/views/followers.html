@@ -1,0 +1,24 @@
+<div id="followers" ng-controller="FollowersCtrl">
+  <div id="loader-wrapper" ng-show="!tweetsLoaded">
+	<div id="loader" class="loader10"></div>
+  </div>
+	<ul class="followers clearfix row" ng-cloak>
+		<li class="follower col-md-6" ng-repeat="follower in followers">
+			<div class="follower-content">
+				<div class="follower-header" style="background-image: url({{follower.profile_background_image_url}})">
+					<figure class="follower-avatar">
+						<img ng-src="{{follower.profile_image_url}}" alt="" class="img-responsive" />
+					</figure>
+				</div>
+				
+				<h4 class="follower-name">
+					<a ng-href="https://twitter.com/{{follower.screen_name}}" class="name">{{follower.name}}</a>
+				</h4>
+				<p class="follower-meta">
+					<a ng-href="https://twitter.com/{{follower.screen_name}}" class="screen-name">@{{follower.screen_name}}</a>
+				</p>
+				<p class="follower-desc">{{follower.description}}</p>
+			</div>
+		</li>
+	</ul>
+</div>
